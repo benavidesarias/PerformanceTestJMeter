@@ -1,0 +1,16 @@
+# Used Plugins
+# 1) Merge Results
+# 2) Command-Line Graph Plotting Tool
+
+# you can find these plugins in https://jmeter-plugins.org/get/
+# put them in folder ->  /lib/ext
+
+#commands
+
+jmeter -n -t ./PerformanceTest/PerformanceTest.jmx -l ./PerformanceTest/test1.jtl -e -o ./PerformanceTest/Test1Report -Jhost=www.udenar.edu.co -Jusers=1 -Jrampup=1 -Jloop=10 -Jtestname=./PerformanceTest/test1
+
+jmeter -n -t ./PerformanceTest/PerformanceTest.jmx -l ./PerformanceTest/test2.jtl -e -o ./PerformanceTest/Test2Report -Jhost=www.udenar.edu.co -Jusers=1000 -Jrampup=15 -Jloop=1 -Jtestname=./PerformanceTest/test2
+
+JMeterPluginsCMD --tool Reporter --generate-csv ./PerformanceTest/CombinedResult.csv --input-jtl ./PerformanceTest/merge-results.properties --plugin-type MergeResults
+
+jmeter -g ./PerformanceTest/CombinedResult.csv -o ./PerformanceTest/HTMLReportCombined
